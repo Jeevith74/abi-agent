@@ -37,3 +37,14 @@ query_agent = QueryAgent(summary, eda_summary)
 
 print("\nQUERY RESPONSE:\n")
 print(query_agent.answer_query("Show correlations"))
+
+####
+
+from core.forecasting import ForecastEngine
+
+forecast_engine = ForecastEngine(df, summary)
+
+forecast_summary = forecast_engine.generate_forecast_summary()
+
+print("\nFORECAST SUMMARY:\n")
+print(forecast_summary)
