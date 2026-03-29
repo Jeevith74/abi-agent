@@ -9,3 +9,14 @@ detector = SchemaDetector(df)
 summary = detector.generate_schema_summary()
 
 print(summary)
+
+#####
+
+from core.eda_engine import EDAEngine
+
+eda = EDAEngine(df)
+
+eda_summary = eda.generate_eda_summary()
+
+print("\nEDA SUMMARY:\n")
+print(eda_summary)
