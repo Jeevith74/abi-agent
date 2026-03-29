@@ -28,3 +28,12 @@ agent = InsightAgent(summary, eda_summary)
 
 print("\nINSIGHTS:\n")
 print(agent.generate_insights())
+
+####
+
+from agents.query_agent import QueryAgent
+
+query_agent = QueryAgent(summary, eda_summary)
+
+print("\nQUERY RESPONSE:\n")
+print(query_agent.answer_query("Show correlations"))
