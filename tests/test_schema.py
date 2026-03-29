@@ -48,3 +48,12 @@ forecast_summary = forecast_engine.generate_forecast_summary()
 
 print("\nFORECAST SUMMARY:\n")
 print(forecast_summary)
+
+####
+
+from core.anomaly_detector import AnomalyDetector
+
+anomaly_detector = AnomalyDetector(df, summary)
+
+print("\nANOMALY SUMMARY:\n")
+print(anomaly_detector.generate_anomaly_summary())
