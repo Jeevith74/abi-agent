@@ -57,3 +57,17 @@ anomaly_detector = AnomalyDetector(df, summary)
 
 print("\nANOMALY SUMMARY:\n")
 print(anomaly_detector.generate_anomaly_summary())
+
+####
+from agents.summary_agent import SummaryAgent
+
+summary_agent = SummaryAgent(
+    summary,
+    eda_summary,
+    agent.generate_insights(),
+    forecast_summary,
+    anomaly_detector.generate_anomaly_summary()
+)
+
+print("\nEXECUTIVE SUMMARY:\n")
+print(summary_agent.generate_summary())
