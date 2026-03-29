@@ -20,3 +20,11 @@ eda_summary = eda.generate_eda_summary()
 
 print("\nEDA SUMMARY:\n")
 print(eda_summary)
+
+####
+from agents.insight_agent import InsightAgent
+
+agent = InsightAgent(summary, eda_summary)
+
+print("\nINSIGHTS:\n")
+print(agent.generate_insights())
