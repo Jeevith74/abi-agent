@@ -27,6 +27,47 @@ class SummaryAgent:
             f"A strong correlation exists between {col1} and {col2} ({value}), "
             "suggesting these variables move together."
         )
+    
+    def skewness_summary(self):
+
+        skewed_cols = self.eda["skewed_columns"]
+
+        if not skewed_cols:
+            return "No significant skewness detected in numeric variables."
+
+        insights = []
+
+        detected_groups = set()
+
+        for col in skewed_cols:
+
+            col_lower = col.lower()
+
+            if "gdp" in col_lower and "gdp" not in detected_groups:
+                insights.append(
+                    "GDP-related indicators vary widely across observations, reflecting economic scale differences."
+                )
+                detected_groups.add("gdp")
+
+            elif "inflation" in col_lower and "inflation" not in detected_groups:
+                insights.append(
+                    "Inflation indicators show strong variation, suggesting macroeconomic instability across regions."
+                )
+                detected_groups.add("inflation")
+
+            elif "unemployment" in col_lower and "unemployment" not in detected_groups:
+                insights.append(
+                    "Unemployment rates differ substantially across observations, indicating uneven labor market conditions."
+                )
+                detected_groups.add("unemployment")
+
+            elif col not in detected_groups:
+                insights.append(
+                    f"{col} shows a highly skewed distribution and may require transformation before modeling."
+                )
+                detected_groups.add(col)
+
+        return " ".join(insights)
 
     def anomaly_summary(self):
 
@@ -50,8 +91,10 @@ class SummaryAgent:
         report.append(self.correlation_summary())
         report.append(self.forecast_summary_text())
         report.append(self.anomaly_summary())
+        report.append(self.skewness_summary())  # ← added here
 
-        if self.insights:
-            report.extend(self.insights)
+        for insight in self.insights:
+                if insight not in report:
+                    report.append(insight)
 
         return " ".join(report)
